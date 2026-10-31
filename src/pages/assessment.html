@@ -1,0 +1,86 @@
+<!--meta {
+  "title": "Candidate Assessment | Seudocom",
+  "description": "Assignments, tests and recorded questions for candidates applying to positions at Seudocom.",
+  "nav": "careers",
+  "scripts": ["careers-data.js", "assessment.js", "forms.js"]
+} -->
+<section class="page-hero page-hero--black page-hero--compact">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--lime">Careers</p>
+    <h1 class="display display--xl">Candidate <mark>assessment.</mark></h1>
+    <p class="lede" id="assessment-role">Choose the position you applied for.</p>
+    <noscript><p class="lede">Please enable JavaScript to view the assessment.</p></noscript>
+  </div>
+</section>
+
+<section class="band band--paper" id="assessment-chooser" aria-labelledby="chooser-title" hidden>
+  <div class="wrap">
+    <h2 class="display display--md" id="chooser-title">Which position did you apply for?</h2>
+    <div class="btn-row assessment-links" id="assessment-choices"></div>
+  </div>
+</section>
+
+<div id="assessment-main" hidden>
+  <section class="band" aria-labelledby="how-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">Before you start</p>
+        <h2 class="display display--lg" id="how-title">How to submit your work.</h2>
+      </header>
+      <ol class="process">
+        <li><span class="index">01</span><h3>Do the work</h3><p>Complete each assignment, activity and test, and save each one as its own file.</p></li>
+        <li><span class="index">02</span><h3>Record your answers</h3><p>Record yourself answering each question on video, with a separate recording for each question.</p></li>
+        <li><span class="index">03</span><h3>Upload and paste</h3><p>Upload everything to your Google Drive, set each file to "Anyone with the link can view", and paste each link into its space below.</p></li>
+      </ol>
+      <p class="process__note"><strong>Protect your information.</strong> Don't include ID numbers, financial details or other sensitive information in your recordings or files. If you need an accommodation to complete this assessment, email {{contact email|Email}}.</p>
+    </div>
+  </section>
+
+  <section class="band band--paper" aria-labelledby="work-title">
+    <div class="wrap form-layout">
+      <div class="form-layout__intro">
+        <p class="eyebrow">Assessment</p>
+        <h2 class="display display--lg" id="work-title">Your answers.</h2>
+        <div class="notice notice--strong" data-form-preview-notice="assessment">
+          <strong>Assessments are not open yet.</strong> This form is a preview. Submissions are not enabled, and nothing you enter is sent or saved.
+        </div>
+      </div>
+      <form class="form" id="assessment-form" data-form="assessment" novalidate>
+        <div class="form__error-summary" data-error-summary tabindex="-1" hidden></div>
+        <input type="hidden" name="position" id="assessment-position">
+        <div class="field">
+          <label for="as-code">Access code <span class="req">Required</span></label>
+          <input id="as-code" name="accessCode" type="text" autocomplete="off" spellcheck="false" placeholder="SEU-XXXX-XXXX-XXXX" required>
+        </div>
+        <h3 class="form__heading">Assignments, activities and tests</h3>
+        <div class="tasks" id="assessment-assignments"></div>
+        <h3 class="form__heading">Recorded questions</h3>
+        <div class="tasks" id="assessment-questions"></div>
+        <div class="field field--check">
+          <input id="as-shared" name="linksShared" type="checkbox" value="yes" data-missing="Please confirm that your links can be viewed." required>
+          <label for="as-shared">I have set every link so that Seudocom can view it.</label>
+        </div>
+        <div class="field field--check">
+          <input id="as-consent" name="consent" type="checkbox" value="yes" required>
+          <label for="as-consent">I consent to Seudocom reviewing my work and recordings as part of my application. I understand that completing this assessment does not guarantee an interview or employment. See our <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</label>
+        </div>
+        <button class="btn btn--black btn--full" type="submit">Check and Submit Assessment</button>
+        <div class="form__result" data-form-result tabindex="-1" hidden></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="band band--black" aria-labelledby="attest-title">
+    <div class="wrap banner">
+      <div>
+        <p class="eyebrow eyebrow--lime">Final step</p>
+        <h2 class="display display--lg" id="attest-title">Notarized affidavit.</h2>
+        <p class="lede">Before your interview, you must have the Seudocom affidavit notarized and upload it to your dashboard when your status asks for it.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--lime" href="assets/docs/seudocom-affidavit-of-confirmation.pdf" download>Download Affidavit</a>
+        <a class="btn btn--white" href="notaries.html">Notarization Partners</a>
+      </div>
+    </div>
+  </section>
+</div>

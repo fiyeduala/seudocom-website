@@ -1,0 +1,147 @@
+<!--meta {
+  "title": "Careers in Telecommunications | Seudocom",
+  "description": "Explore working with Seudocom. Review available opportunities, learn how the application process works, and prepare your application.",
+  "nav": "careers",
+  "scripts": ["careers-data.js", "forms.js", "careers.js"]
+} -->
+<section class="page-hero page-hero--black">
+  <div class="wrap page-hero__grid">
+    <div>
+      <p class="eyebrow eyebrow--lime">Careers</p>
+      <h1 class="display display--xl">Build Your Career. Build the <mark>Network.</mark></h1>
+      <p class="lede">Seudocom is building a network of telecommunications professionals to support infrastructure projects and operational requirements.</p>
+      <div class="btn-row">
+        <a class="btn btn--lime" href="#opportunities">View Opportunities</a>
+        <a class="btn btn--white" href="#apply">Apply</a>
+      </div>
+    </div>
+    <figure class="photo photo--chamfer page-hero__photo page-hero__photo--tall">{{img climber-on-lattice-tower|A climber at the top of a tall lattice communications tower, seen from below against the sky|(min-width: 900px) 45vw, 100vw|eager}}</figure>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <p class="eyebrow eyebrow--block">Working with Seudocom</p>
+    <div class="prose prose--lg">
+      <h2 class="display display--md">Work that keeps people connected.</h2>
+      <p>Telecommunications networks are built and maintained by skilled people. If that describes you, or the career you want, we would like to learn about your experience. As a growing company, we are building our network of professionals now.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--paper" id="opportunities" aria-labelledby="opps-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Opportunities</p>
+      <h2 class="display display--lg" id="opps-title">Available opportunities.</h2>
+    </header>
+    <p class="notice" id="jobs-sample-notice" hidden><strong>Sample listings only.</strong> The entries below show how positions will appear. They are not real openings.</p>
+    <div class="job-grid" id="job-list" aria-live="polite">
+      <noscript><p class="empty-state">Please enable JavaScript to view available opportunities, or contact us directly.</p></noscript>
+    </div>
+    <div class="empty-state" id="jobs-empty" hidden>
+      <h3>No positions are published right now.</h3>
+      <p>You can still tell us about your experience using the general application.</p>
+      <a class="btn btn--black" href="#apply">Go to General Application</a>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="process-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2 class="display display--lg" id="process-title">The application process.</h2>
+    </header>
+    <ol class="process" id="process-list"></ol>
+    <p class="process__note"><strong>Submitting an application does not guarantee employment.</strong> Your dashboard shows where your application stands.</p>
+    <div class="btn-row assessment-links" id="assessment-links"><a class="btn btn--black" href="dashboard.html">Applicant Dashboard</a></div>
+  </div>
+</section>
+
+<section class="band band--paper" id="apply" aria-labelledby="apply-title">
+  <div class="wrap form-layout">
+    <div class="form-layout__intro">
+      <p class="eyebrow">Apply</p>
+      <h2 class="display display--lg" id="apply-title">Application form.</h2>
+      <p>Apply for a listed position, or choose the general application if you don't see a suitable match.</p>
+      <div class="notice notice--strong" data-form-preview-notice="application">
+        <strong>Applications are not open yet.</strong> This form is a preview. Submissions are not enabled, and nothing you enter or attach is sent or saved. Please don't enter sensitive information for now.
+      </div>
+    </div>
+    <form class="form" id="application-form" data-form="application" novalidate>
+      <div class="form__error-summary" data-error-summary tabindex="-1" hidden></div>
+      <div class="applying-for" id="applying-for" hidden></div>
+      <div class="field-row">
+        <div class="field">
+          <label for="app-name">Full name <span class="req">Required</span></label>
+          <input id="app-name" name="fullName" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="app-email">Email address <span class="req">Required</span></label>
+          <input id="app-email" name="email" type="email" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="app-phone">Phone number <span class="req">Required</span></label>
+          <input id="app-phone" name="phone" type="tel" autocomplete="tel" required>
+        </div>
+        <div class="field">
+          <label for="app-nationality">Nationality <span class="req">Required</span></label>
+          <input id="app-nationality" name="nationality" type="text" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="app-address">Mailing address <span class="req">Required</span></label>
+        <input id="app-address" name="address" type="text" autocomplete="street-address" required>
+      </div>
+      <div class="field">
+        <label for="app-location">City and state <span class="req">Required</span></label>
+        <input id="app-location" name="location" type="text" autocomplete="address-level2" placeholder="City, State" required>
+      </div>
+      <div class="field">
+        <label for="app-position">Position of interest <span class="req">Required</span></label>
+        <select id="app-position" name="position" required>
+          <option value="general">General application</option>
+        </select>
+      </div>
+      <div class="field" id="app-role-field">
+        <label for="app-role">Type of role you're looking for <span class="opt">Optional</span></label>
+        <input id="app-role" name="preferredRole" type="text">
+      </div>
+      <div class="field">
+        <label for="app-experience">Relevant professional experience <span class="req">Required</span></label>
+        <textarea id="app-experience" name="experience" rows="6" aria-describedby="app-experience-hint" required></textarea>
+        <p class="hint" id="app-experience-hint">Summarize your customer support, telecommunications or related experience.</p>
+      </div>
+      <div class="field">
+        <label for="app-resume">Resume <span class="req">Required</span></label>
+        <div class="file">
+          <input id="app-resume" name="resume" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" data-max-mb="5" aria-describedby="app-resume-hint" required>
+          <span class="file__button" aria-hidden="true">Choose file</span>
+          <span class="file__name" data-file-name aria-hidden="true">No file selected</span>
+        </div>
+        <p class="hint" id="app-resume-hint">PDF or DOCX, up to 5 MB.</p>
+      </div>
+      <div class="field">
+        <label for="app-cover">Cover letter <span class="opt">Optional</span></label>
+        <textarea id="app-cover" name="coverLetter" rows="5"></textarea>
+      </div>
+      <div class="field field--check">
+        <input id="app-consent" name="consent" type="checkbox" value="yes" required>
+        <label for="app-consent">I consent to Seudocom processing the information in this form to review my application. Seudocom may email me updates about my application. I understand that applying does not guarantee employment. See our <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</label>
+      </div>
+      <button class="btn btn--black btn--full" type="submit">Check and Submit Application</button>
+      <div class="form__result" data-form-result tabindex="-1" hidden></div>
+    </form>
+  </div>
+</section>
+
+<dialog class="job-dialog" id="job-dialog" aria-labelledby="job-dialog-title">
+  <div class="job-dialog__head">
+    <div id="job-dialog-tags" class="tags"></div>
+    <button class="job-dialog__close" type="button" id="job-dialog-close" aria-label="Close position details">Close</button>
+  </div>
+  <div class="job-dialog__body" id="job-dialog-body"></div>
+</dialog>

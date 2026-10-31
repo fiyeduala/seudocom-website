@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Applicant Dashboard | Seudocom</title>
+  <meta name="description" content="Check the status of your Seudocom application with your access code.">
+  <meta name="robots" content="noindex">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Seudocom">
+  <meta property="og:title" content="Applicant Dashboard | Seudocom">
+  <meta property="og:description" content="Check the status of your Seudocom application with your access code.">
+  <meta property="og:url" content="https://pseudocom.org/dashboard">
+  <meta property="og:image" content="https://pseudocom.org/assets/img/og-seudocom.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="assets/js/site-config.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/careers-data.js" defer></script>
+  <script src="assets/js/dashboard.js" defer></script>
+</head>
+<body class="show-draft">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-logo" href="index.html" aria-label="Seudocom home">
+      <img src="assets/svg/logo-horizontal.svg" alt="" width="178" height="42">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__label">Menu</span>
+      <span class="nav-toggle__icon" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="network-services.html" >Network Services</a></li>
+        <li><a href="workforce-solutions.html" >Workforce Solutions</a></li>
+        <li><a href="about.html" >About</a></li>
+        <li><a href="careers.html" aria-current="page">Careers</a></li>
+        <li><a href="contact.html" >Contact</a></li>
+      </ul>
+      <a class="btn btn--lime btn--sm site-nav__cta" href="contact.html#inquiry">Start an Inquiry</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="page-hero page-hero--black page-hero--compact">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--lime">Careers</p>
+    <h1 class="display display--xl">Applicant <mark>dashboard.</mark></h1>
+    <p class="lede">Check your application status and read updates from Seudocom.</p>
+    <noscript><p class="lede">Please enable JavaScript to use the dashboard.</p></noscript>
+  </div>
+</section>
+
+<section class="band band--paper" id="dash-login" aria-labelledby="dash-login-title" hidden>
+  <div class="wrap form-layout">
+    <div class="form-layout__intro">
+      <h2 class="display display--lg" id="dash-login-title">Enter your access code.</h2>
+      <p>You received your code when you submitted your application. It was shown only once. If you have lost it, email <a href="mailto:contact@seudocom.org">contact@seudocom.org</a> from the address on your application.</p>
+    </div>
+    <form class="form" id="dash-form" novalidate>
+      <div class="field">
+        <label for="dash-code">Access code</label>
+        <input id="dash-code" name="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="SEU-XXXX-XXXX-XXXX" required>
+      </div>
+      <button class="btn btn--black btn--full" type="submit">View My Status</button>
+      <div class="form__result form__result--error" id="dash-error" role="alert" tabindex="-1" hidden></div>
+    </form>
+  </div>
+</section>
+
+<div id="dash-panel" hidden>
+  <section class="band" aria-labelledby="dash-status-title">
+    <div class="wrap">
+      <p class="eyebrow">Your application</p>
+      <h2 class="display display--lg" id="dash-status-title"></h2>
+      <dl class="admin-facts" id="dash-facts"></dl>
+      <div class="btn-row assessment-links">
+        <a class="btn btn--black" id="dash-assessment" hidden>Open My Assessment</a>
+        <button class="btn btn--white" type="button" id="dash-logout">Sign Out</button>
+      </div>
+      <p class="process__note">Your status does not guarantee an interview or employment.</p>
+    </div>
+  </section>
+  <section class="band band--black" id="dash-affidavit" aria-labelledby="dash-affidavit-title" hidden>
+    <div class="wrap">
+      <p class="eyebrow eyebrow--lime">Before your interview</p>
+      <h2 class="display display--md" id="dash-affidavit-title">Notarized affidavit.</h2>
+      <p class="lede" id="dash-affidavit-state"></p>
+      <div id="dash-affidavit-steps">
+        <p class="admin-gap">Download the affidavit and complete it. Sign it in front of a notary public, then upload the notarized copy here.</p>
+        <div class="btn-row assessment-links">
+          <a class="btn btn--lime" href="assets/docs/seudocom-affidavit-of-confirmation.pdf" download>Download Affidavit</a>
+          <a class="btn btn--white" href="notaries.html" target="_blank" rel="noopener">Choose a Notarization Partner</a>
+        </div>
+        <form class="form admin-gap admin-narrow" id="dash-affidavit-form" novalidate>
+          <div class="field">
+            <label for="dash-affidavit-file">Signed, notarized affidavit (PDF, JPG or PNG, up to 5 MB)</label>
+            <input id="dash-affidavit-file" name="affidavit" type="file" accept=".pdf,.jpg,.jpeg,.png" required>
+          </div>
+          <button class="btn btn--black btn--full" type="submit">Upload Affidavit</button>
+          <div class="form__result form__result--error" id="dash-affidavit-error" role="alert" tabindex="-1" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="band band--paper" aria-labelledby="dash-updates-title">
+    <div class="wrap">
+      <h2 class="display display--md" id="dash-updates-title">Updates from Seudocom.</h2>
+      <div class="tasks admin-gap" id="dash-updates"></div>
+    </div>
+  </section>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__brand">
+      <img src="assets/svg/logo-horizontal-dark.svg" alt="Seudocom" width="240" height="56" loading="lazy">
+      <p>Telecommunications infrastructure and workforce solutions.</p>
+    </div>
+    <nav aria-label="Services">
+      <h2>Services</h2>
+      <ul>
+        <li><a href="network-services.html">Network Services</a></li>
+        <li><a href="workforce-solutions.html">Workforce Solutions</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h2>Company</h2>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Contact</h2>
+      <ul>
+        <li><a href="mailto:contact@seudocom.org">contact@seudocom.org</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap site-footer__legal">
+    <p>&copy; 2026 Seudocom.</p>
+    <p><a href="privacy.html">Privacy policy</a> &nbsp;|&nbsp; <a href="image-credits.html">Image credits</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

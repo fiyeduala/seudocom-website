@@ -1,0 +1,75 @@
+<!--meta {
+  "title": "Applicant Dashboard | Seudocom",
+  "description": "Check the status of your Seudocom application with your access code.",
+  "nav": "careers",
+  "noindex": true,
+  "scripts": ["careers-data.js", "dashboard.js"]
+} -->
+<section class="page-hero page-hero--black page-hero--compact">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--lime">Careers</p>
+    <h1 class="display display--xl">Applicant <mark>dashboard.</mark></h1>
+    <p class="lede">Check your application status and read updates from Seudocom.</p>
+    <noscript><p class="lede">Please enable JavaScript to use the dashboard.</p></noscript>
+  </div>
+</section>
+
+<section class="band band--paper" id="dash-login" aria-labelledby="dash-login-title" hidden>
+  <div class="wrap form-layout">
+    <div class="form-layout__intro">
+      <h2 class="display display--lg" id="dash-login-title">Enter your access code.</h2>
+      <p>You received your code when you submitted your application. It was shown only once. If you have lost it, email {{contact email|Email}} from the address on your application.</p>
+    </div>
+    <form class="form" id="dash-form" novalidate>
+      <div class="field">
+        <label for="dash-code">Access code</label>
+        <input id="dash-code" name="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="SEU-XXXX-XXXX-XXXX" required>
+      </div>
+      <button class="btn btn--black btn--full" type="submit">View My Status</button>
+      <div class="form__result form__result--error" id="dash-error" role="alert" tabindex="-1" hidden></div>
+    </form>
+  </div>
+</section>
+
+<div id="dash-panel" hidden>
+  <section class="band" aria-labelledby="dash-status-title">
+    <div class="wrap">
+      <p class="eyebrow">Your application</p>
+      <h2 class="display display--lg" id="dash-status-title"></h2>
+      <dl class="admin-facts" id="dash-facts"></dl>
+      <div class="btn-row assessment-links">
+        <a class="btn btn--black" id="dash-assessment" hidden>Open My Assessment</a>
+        <button class="btn btn--white" type="button" id="dash-logout">Sign Out</button>
+      </div>
+      <p class="process__note">Your status does not guarantee an interview or employment.</p>
+    </div>
+  </section>
+  <section class="band band--black" id="dash-affidavit" aria-labelledby="dash-affidavit-title" hidden>
+    <div class="wrap">
+      <p class="eyebrow eyebrow--lime">Before your interview</p>
+      <h2 class="display display--md" id="dash-affidavit-title">Notarized affidavit.</h2>
+      <p class="lede" id="dash-affidavit-state"></p>
+      <div id="dash-affidavit-steps">
+        <p class="admin-gap">Download the affidavit and complete it. Sign it in front of a notary public, then upload the notarized copy here.</p>
+        <div class="btn-row assessment-links">
+          <a class="btn btn--lime" href="assets/docs/seudocom-affidavit-of-confirmation.pdf" download>Download Affidavit</a>
+          <a class="btn btn--white" href="notaries.html" target="_blank" rel="noopener">Choose a Notarization Partner</a>
+        </div>
+        <form class="form admin-gap admin-narrow" id="dash-affidavit-form" novalidate>
+          <div class="field">
+            <label for="dash-affidavit-file">Signed, notarized affidavit (PDF, JPG or PNG, up to 5 MB)</label>
+            <input id="dash-affidavit-file" name="affidavit" type="file" accept=".pdf,.jpg,.jpeg,.png" required>
+          </div>
+          <button class="btn btn--black btn--full" type="submit">Upload Affidavit</button>
+          <div class="form__result form__result--error" id="dash-affidavit-error" role="alert" tabindex="-1" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="band band--paper" aria-labelledby="dash-updates-title">
+    <div class="wrap">
+      <h2 class="display display--md" id="dash-updates-title">Updates from Seudocom.</h2>
+      <div class="tasks admin-gap" id="dash-updates"></div>
+    </div>
+  </section>
+</div>

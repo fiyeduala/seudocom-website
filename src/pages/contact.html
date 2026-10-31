@@ -1,0 +1,101 @@
+<!--meta {
+  "title": "Contact Seudocom | Project and Workforce Inquiries",
+  "description": "Contact Seudocom about telecommunications network construction, maintenance or workforce requirements.",
+  "nav": "contact",
+  "scripts": ["forms.js", "contact.js"]
+} -->
+<section class="page-hero page-hero--compact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h1 class="display display--xl">Tell us what you need to <mark>connect.</mark></h1>
+    <p class="lede">Whether you're planning a network project, need maintenance support or have a workforce requirement, start here.</p>
+  </div>
+</section>
+
+<section class="band band--paper" id="inquiry" aria-labelledby="inquiry-title">
+  <div class="wrap form-layout">
+    <div class="form-layout__intro">
+      <h2 class="display display--lg" id="inquiry-title">Project inquiry.</h2>
+      <div class="notice notice--strong" data-form-preview-notice="contact">
+        <strong>This form can't send messages yet.</strong> It is a preview, and nothing you enter is sent or saved. Please email us instead, using the address below.
+      </div>
+      <div class="contact-card">
+        <h3>Contact details</h3>
+        <dl>
+          <dt>Email</dt><dd>{{contact email|Email}}</dd>
+          <dt>Hours</dt><dd>{{contact hours|Hours}}</dd>
+        </dl>
+      </div>
+    </div>
+    <form class="form" id="contact-form" data-form="contact" novalidate>
+      <div class="form__error-summary" data-error-summary tabindex="-1" hidden></div>
+      <div class="field-row">
+        <div class="field">
+          <label for="c-name">Name <span class="req">Required</span></label>
+          <input id="c-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="c-company">Company <span class="req">Required</span></label>
+          <input id="c-company" name="company" type="text" autocomplete="organization" required>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="c-email">Email <span class="req">Required</span></label>
+          <input id="c-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="c-phone">Phone number <span class="opt">Optional</span></label>
+          <input id="c-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+      </div>
+      <div class="field">
+        <label for="c-type">Inquiry type <span class="req">Required</span></label>
+        <select id="c-type" name="inquiryType" required>
+          <option value="">Select an inquiry type</option>
+          <option value="construction">Network construction and deployment</option>
+          <option value="maintenance">Network maintenance</option>
+          <option value="workforce">Workforce or staffing requirement</option>
+          <option value="partnership">Partnership</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="c-req">Project or workforce requirements <span class="req">Required</span></label>
+        <textarea id="c-req" name="requirements" rows="6" aria-describedby="c-req-hint" required></textarea>
+        <p class="hint" id="c-req-hint">The work or roles involved, location and timing, as far as you know them.</p>
+      </div>
+      <div class="field">
+        <label for="c-msg">Additional message <span class="opt">Optional</span></label>
+        <textarea id="c-msg" name="message" rows="4"></textarea>
+      </div>
+      <button class="btn btn--black btn--full" type="submit">Check and Send Inquiry</button>
+      <div class="form__result" data-form-result tabindex="-1" hidden></div>
+    </form>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="paths-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">Other routes</p>
+      <h2 class="display display--lg" id="paths-title">Looking for something specific?</h2>
+    </header>
+    <div class="two-col">
+      <div class="panel panel--lime">
+        <h3>I need telecom workers</h3>
+        <p>Find out how Seudocom supports workforce requirements, or send us your staffing needs.</p>
+        <div class="btn-row">
+          <a class="btn btn--black" href="workforce-solutions.html">Workforce Solutions</a>
+        </div>
+      </div>
+      <div class="panel panel--black">
+        <h3>I'm looking for work</h3>
+        <p>Job seekers should use the careers page rather than this form.</p>
+        <div class="btn-row">
+          <a class="btn btn--lime" href="careers.html">Explore Careers</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

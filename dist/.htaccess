@@ -1,0 +1,46 @@
+# Seudocom: Apache settings for shared cPanel hosting.
+
+Options -Indexes -MultiViews
+ErrorDocument 404 /404.html
+
+# Send all traffic to HTTPS. Enable SSL in cPanel (AutoSSL) before uploading this file.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Hide .html: /careers.html redirects to /careers, which serves careers.html.
+  RewriteCond %{THE_REQUEST} \s/+(?:index\.html)?[\s?]
+  RewriteRule ^index\.html$ / [L,R=301]
+  RewriteCond %{THE_REQUEST} \s/+([^\s?]+)\.html[\s?]
+  RewriteRule ^ /%1 [L,R=301]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+)$ $1.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript image/svg+xml application/xml text/plain
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType text/javascript "access plus 1 hour"
+  ExpiresByType application/javascript "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+AddType image/webp .webp
+AddType image/svg+xml .svg

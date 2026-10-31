@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Candidate Assessment | Seudocom</title>
+  <meta name="description" content="Assignments, tests and recorded questions for candidates applying to positions at Seudocom.">
+  <link rel="canonical" href="https://pseudocom.org/assessment">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Seudocom">
+  <meta property="og:title" content="Candidate Assessment | Seudocom">
+  <meta property="og:description" content="Assignments, tests and recorded questions for candidates applying to positions at Seudocom.">
+  <meta property="og:url" content="https://pseudocom.org/assessment">
+  <meta property="og:image" content="https://pseudocom.org/assets/img/og-seudocom.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="assets/js/site-config.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/careers-data.js" defer></script>
+  <script src="assets/js/assessment.js" defer></script>
+  <script src="assets/js/forms.js" defer></script>
+</head>
+<body class="show-draft">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-logo" href="index.html" aria-label="Seudocom home">
+      <img src="assets/svg/logo-horizontal.svg" alt="" width="178" height="42">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__label">Menu</span>
+      <span class="nav-toggle__icon" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="network-services.html" >Network Services</a></li>
+        <li><a href="workforce-solutions.html" >Workforce Solutions</a></li>
+        <li><a href="about.html" >About</a></li>
+        <li><a href="careers.html" aria-current="page">Careers</a></li>
+        <li><a href="contact.html" >Contact</a></li>
+      </ul>
+      <a class="btn btn--lime btn--sm site-nav__cta" href="contact.html#inquiry">Start an Inquiry</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="page-hero page-hero--black page-hero--compact">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--lime">Careers</p>
+    <h1 class="display display--xl">Candidate <mark>assessment.</mark></h1>
+    <p class="lede" id="assessment-role">Choose the position you applied for.</p>
+    <noscript><p class="lede">Please enable JavaScript to view the assessment.</p></noscript>
+  </div>
+</section>
+
+<section class="band band--paper" id="assessment-chooser" aria-labelledby="chooser-title" hidden>
+  <div class="wrap">
+    <h2 class="display display--md" id="chooser-title">Which position did you apply for?</h2>
+    <div class="btn-row assessment-links" id="assessment-choices"></div>
+  </div>
+</section>
+
+<div id="assessment-main" hidden>
+  <section class="band" aria-labelledby="how-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">Before you start</p>
+        <h2 class="display display--lg" id="how-title">How to submit your work.</h2>
+      </header>
+      <ol class="process">
+        <li><span class="index">01</span><h3>Do the work</h3><p>Complete each assignment, activity and test, and save each one as its own file.</p></li>
+        <li><span class="index">02</span><h3>Record your answers</h3><p>Record yourself answering each question on video, with a separate recording for each question.</p></li>
+        <li><span class="index">03</span><h3>Upload and paste</h3><p>Upload everything to your Google Drive, set each file to "Anyone with the link can view", and paste each link into its space below.</p></li>
+      </ol>
+      <p class="process__note"><strong>Protect your information.</strong> Don't include ID numbers, financial details or other sensitive information in your recordings or files. If you need an accommodation to complete this assessment, email <a href="mailto:contact@seudocom.org">contact@seudocom.org</a>.</p>
+    </div>
+  </section>
+
+  <section class="band band--paper" aria-labelledby="work-title">
+    <div class="wrap form-layout">
+      <div class="form-layout__intro">
+        <p class="eyebrow">Assessment</p>
+        <h2 class="display display--lg" id="work-title">Your answers.</h2>
+        <div class="notice notice--strong" data-form-preview-notice="assessment">
+          <strong>Assessments are not open yet.</strong> This form is a preview. Submissions are not enabled, and nothing you enter is sent or saved.
+        </div>
+      </div>
+      <form class="form" id="assessment-form" data-form="assessment" novalidate>
+        <div class="form__error-summary" data-error-summary tabindex="-1" hidden></div>
+        <input type="hidden" name="position" id="assessment-position">
+        <div class="field">
+          <label for="as-code">Access code <span class="req">Required</span></label>
+          <input id="as-code" name="accessCode" type="text" autocomplete="off" spellcheck="false" placeholder="SEU-XXXX-XXXX-XXXX" required>
+        </div>
+        <h3 class="form__heading">Assignments, activities and tests</h3>
+        <div class="tasks" id="assessment-assignments"></div>
+        <h3 class="form__heading">Recorded questions</h3>
+        <div class="tasks" id="assessment-questions"></div>
+        <div class="field field--check">
+          <input id="as-shared" name="linksShared" type="checkbox" value="yes" data-missing="Please confirm that your links can be viewed." required>
+          <label for="as-shared">I have set every link so that Seudocom can view it.</label>
+        </div>
+        <div class="field field--check">
+          <input id="as-consent" name="consent" type="checkbox" value="yes" required>
+          <label for="as-consent">I consent to Seudocom reviewing my work and recordings as part of my application. I understand that completing this assessment does not guarantee an interview or employment. See our <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</label>
+        </div>
+        <button class="btn btn--black btn--full" type="submit">Check and Submit Assessment</button>
+        <div class="form__result" data-form-result tabindex="-1" hidden></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="band band--black" aria-labelledby="attest-title">
+    <div class="wrap banner">
+      <div>
+        <p class="eyebrow eyebrow--lime">Final step</p>
+        <h2 class="display display--lg" id="attest-title">Notarized affidavit.</h2>
+        <p class="lede">Before your interview, you must have the Seudocom affidavit notarized and upload it to your dashboard when your status asks for it.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--lime" href="assets/docs/seudocom-affidavit-of-confirmation.pdf" download>Download Affidavit</a>
+        <a class="btn btn--white" href="notaries.html">Notarization Partners</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__brand">
+      <img src="assets/svg/logo-horizontal-dark.svg" alt="Seudocom" width="240" height="56" loading="lazy">
+      <p>Telecommunications infrastructure and workforce solutions.</p>
+    </div>
+    <nav aria-label="Services">
+      <h2>Services</h2>
+      <ul>
+        <li><a href="network-services.html">Network Services</a></li>
+        <li><a href="workforce-solutions.html">Workforce Solutions</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h2>Company</h2>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Contact</h2>
+      <ul>
+        <li><a href="mailto:contact@seudocom.org">contact@seudocom.org</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap site-footer__legal">
+    <p>&copy; 2026 Seudocom.</p>
+    <p><a href="privacy.html">Privacy policy</a> &nbsp;|&nbsp; <a href="image-credits.html">Image credits</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

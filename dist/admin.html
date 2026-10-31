@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Console | Seudocom</title>
+  <meta name="description" content="Seudocom recruitment administration.">
+  <meta name="robots" content="noindex">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Seudocom">
+  <meta property="og:title" content="Admin Console | Seudocom">
+  <meta property="og:description" content="Seudocom recruitment administration.">
+  <meta property="og:url" content="https://pseudocom.org/admin">
+  <meta property="og:image" content="https://pseudocom.org/assets/img/og-seudocom.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="assets/js/site-config.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/careers-data.js" defer></script>
+  <script src="assets/js/admin.js" defer></script>
+</head>
+<body class="show-draft">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-logo" href="index.html" aria-label="Seudocom home">
+      <img src="assets/svg/logo-horizontal.svg" alt="" width="178" height="42">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__label">Menu</span>
+      <span class="nav-toggle__icon" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="network-services.html" >Network Services</a></li>
+        <li><a href="workforce-solutions.html" >Workforce Solutions</a></li>
+        <li><a href="about.html" >About</a></li>
+        <li><a href="careers.html" >Careers</a></li>
+        <li><a href="contact.html" >Contact</a></li>
+      </ul>
+      <a class="btn btn--lime btn--sm site-nav__cta" href="contact.html#inquiry">Start an Inquiry</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="band band--paper">
+  <div class="wrap">
+    <h1 class="display display--lg">Admin console.</h1>
+    <noscript><p>Please enable JavaScript to use the console.</p></noscript>
+
+    <form class="form admin-narrow admin-gap" id="setup-form" novalidate hidden>
+      <p><strong>First-time setup.</strong> Enter the key from <code>setup-key.txt</code> in the <code>seudocom-data</code> folder, then create the admin account.</p>
+      <div class="field"><label for="setup-key">Setup key</label><input id="setup-key" type="text" autocomplete="off" required></div>
+      <div class="field"><label for="setup-email">Admin email</label><input id="setup-email" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="setup-password">Password, at least 12 characters</label><input id="setup-password" type="password" autocomplete="new-password" required></div>
+      <button class="btn btn--black btn--full" type="submit">Create Admin Account</button>
+    </form>
+
+    <form class="form admin-narrow admin-gap" id="login-form" novalidate hidden>
+      <div class="field"><label for="login-email">Email</label><input id="login-email" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" required></div>
+      <button class="btn btn--black btn--full" type="submit">Sign In</button>
+    </form>
+
+    <div class="form__result form__result--error admin-gap" id="admin-error" role="alert" tabindex="-1" hidden></div>
+
+    <div id="console" class="admin-gap" hidden>
+      <div class="admin-bar">
+        <p>Signed in as <strong id="admin-email"></strong></p>
+        <button class="btn btn--white btn--sm" type="button" id="admin-logout">Sign Out</button>
+      </div>
+
+      <div class="admin-filters">
+        <div class="field"><label for="f-q">Search name or email</label><input id="f-q" type="text"></div>
+        <div class="field"><label for="f-status">Status</label><select id="f-status"></select></div>
+        <div class="field"><label for="f-position">Position</label><select id="f-position"></select></div>
+      </div>
+      <p class="admin-gap" id="admin-count" role="status"></p>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Position</th><th>Status</th><th>Applied</th><th>Assessment</th><th>Affidavit</th><th><span class="visually-hidden">Open</span></th></tr></thead>
+          <tbody id="admin-rows"></tbody>
+        </table>
+      </div>
+
+      <section class="task admin-gap" id="admin-detail" tabindex="-1" hidden></section>
+
+      <section class="admin-gap" aria-labelledby="partners-title">
+        <h2 class="display display--md" id="partners-title">Notarization partners.</h2>
+        <p>These appear on the public <a href="notaries.html" target="_blank" rel="noopener">partners page</a>.</p>
+        <div class="tasks admin-gap" id="partner-rows"></div>
+        <form class="form admin-gap" id="partner-form" novalidate>
+          <h3 class="form__subject" id="partner-form-title">Add a partner</h3>
+          <div class="field"><label for="p-name">Name</label><input id="p-name" type="text" maxlength="200" required></div>
+          <div class="field"><label for="p-url">Website link, starting with https://</label><input id="p-url" type="url" maxlength="500" required></div>
+          <div class="field"><label for="p-location">Location (optional)</label><input id="p-location" type="text" maxlength="200"></div>
+          <div class="field"><label for="p-details">Details (optional)</label><textarea id="p-details" rows="3" maxlength="2000"></textarea></div>
+          <div class="btn-row">
+            <button class="btn btn--black" type="submit">Save Partner</button>
+            <button class="btn btn--white" type="button" id="partner-cancel" hidden>Cancel Edit</button>
+          </div>
+        </form>
+      </section>
+
+      <form class="form admin-gap" id="broadcast-form" novalidate>
+        <h2 class="display display--md">Mass email.</h2>
+        <p>Goes to everyone matching the Status and Position filters above, one email per person. It also appears on each person's dashboard. <strong id="broadcast-count"></strong></p>
+        <div class="field"><label for="b-subject">Subject</label><input id="b-subject" type="text" maxlength="200" required></div>
+        <div class="field"><label for="b-message">Message</label><textarea id="b-message" rows="6" required></textarea></div>
+        <button class="btn btn--black" type="submit">Send Update</button>
+        <div class="form__result" id="broadcast-result" role="status" tabindex="-1" hidden></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__brand">
+      <img src="assets/svg/logo-horizontal-dark.svg" alt="Seudocom" width="240" height="56" loading="lazy">
+      <p>Telecommunications infrastructure and workforce solutions.</p>
+    </div>
+    <nav aria-label="Services">
+      <h2>Services</h2>
+      <ul>
+        <li><a href="network-services.html">Network Services</a></li>
+        <li><a href="workforce-solutions.html">Workforce Solutions</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h2>Company</h2>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Contact</h2>
+      <ul>
+        <li><a href="mailto:contact@seudocom.org">contact@seudocom.org</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap site-footer__legal">
+    <p>&copy; 2026 Seudocom.</p>
+    <p><a href="privacy.html">Privacy policy</a> &nbsp;|&nbsp; <a href="image-credits.html">Image credits</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

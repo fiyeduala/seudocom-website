@@ -1,0 +1,20 @@
+{
+  "name": "seudocom-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Seudocom static website. Node is only needed on a developer machine, never on the server.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs",
+    "serve:full": "php -S localhost:8080 -t dist",
+    "affidavit": "node scripts/make-affidavit.mjs",
+    "logos": "node scripts/make-logos.mjs",
+    "images": "node scripts/process-images.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/oxanium": "5.0.0",
+    "opentype.js": "1.3.4",
+    "sharp": "0.33.5"
+  }
+}
