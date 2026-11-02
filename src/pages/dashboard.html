@@ -36,17 +36,100 @@
     <div class="wrap">
       <p class="eyebrow">Your application</p>
       <h2 class="display display--lg" id="dash-status-title"></h2>
+      <p class="lede" id="dash-status-message"></p>
+      <ol class="dash-steps admin-gap" id="dash-steps" aria-label="Your progress"></ol>
+      <div class="notice notice--strong admin-gap" id="dash-push" hidden>
+        <h3 class="form__subject">Notifications</h3>
+        <p id="dash-push-state"></p>
+        <p>Your progress updates come through these notifications and this dashboard. Email is sent only if you are hired.</p>
+        <div class="btn-row assessment-links">
+          <button class="btn btn--black" type="button" id="dash-push-toggle" hidden>Turn On Notifications</button>
+        </div>
+        <div class="form__result form__result--error" id="dash-push-error" role="alert" tabindex="-1" hidden></div>
+      </div>
       <dl class="admin-facts" id="dash-facts"></dl>
       <div class="btn-row assessment-links">
         <a class="btn btn--black" id="dash-assessment" hidden>Open My Assessment</a>
         <button class="btn btn--white" type="button" id="dash-logout">Sign Out</button>
       </div>
-      <p class="process__note">Your status does not guarantee an interview or employment.</p>
+      <p class="process__note">Your status does not guarantee an interview or employment. Seudocom will never ask you to pay a fee to receive a job offer or to start work.</p>
+    </div>
+  </section>
+  <section class="band band--paper" id="dash-certificate" aria-labelledby="dash-certificate-title" hidden>
+    <div class="wrap">
+      <p class="eyebrow">Step 2</p>
+      <h2 class="display display--md" id="dash-certificate-title">Your certificate.</h2>
+      <p class="lede" id="dash-certificate-state"></p>
+      <div id="dash-certificate-steps">
+        <form class="form admin-gap admin-narrow" id="dash-certificate-form" novalidate>
+          <div class="field">
+            <label for="dash-certificate-issuer">Who issued your certificate?</label>
+            <input id="dash-certificate-issuer" name="issuer" type="text" maxlength="200" required>
+          </div>
+          <div class="field">
+            <label for="dash-certificate-file">Customer support or customer relations certificate (PDF, JPG or PNG, up to 5 MB)</label>
+            <input id="dash-certificate-file" name="certificate" type="file" accept=".pdf,.jpg,.jpeg,.png" required>
+          </div>
+          <button class="btn btn--black btn--full" type="submit">Upload Certificate</button>
+          <div class="form__result form__result--error" id="dash-certificate-error" role="alert" tabindex="-1" hidden></div>
+        </form>
+        <div class="notice notice--strong admin-gap">
+          <h3 class="display display--md">Don't have a certificate?</h3>
+          <p><strong>You can get one from any recognized provider.</strong> You are not required to use a listed provider, and a certificate does not guarantee an interview or employment.</p>
+          <div class="tasks admin-gap" id="dash-certificate-partners"></div>
+          <div class="btn-row assessment-links">
+            <a class="btn btn--black" href="certificates.html" target="_blank" rel="noopener">See All Certificate Options</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band" id="dash-identity" aria-labelledby="dash-identity-title" hidden>
+    <div class="wrap">
+      <p class="eyebrow">Step 3</p>
+      <h2 class="display display--md" id="dash-identity-title">Confirm your identity.</h2>
+      <p class="lede" id="dash-identity-state"></p>
+      <div id="dash-identity-steps">
+        <p class="admin-gap">Upload a clear photo or scan of a government-issued photo ID, so Seudocom can match it to your application and recordings. You may cover your ID number except its last four digits. Only upload it here: never send your ID by email or messaging apps. Seudocom deletes the file once it has made a decision.</p>
+        <form class="form admin-gap admin-narrow" id="dash-identity-form" novalidate>
+          <div class="field">
+            <label for="dash-identity-file">Government-issued photo ID (PDF, JPG or PNG, up to 5 MB)</label>
+            <input id="dash-identity-file" name="identity" type="file" accept=".pdf,.jpg,.jpeg,.png" required>
+          </div>
+          <div class="field field--check">
+            <input id="dash-identity-consent" name="consent" type="checkbox" value="yes" required>
+            <label for="dash-identity-consent">I consent to Seudocom using this document to confirm my identity. See our <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</label>
+          </div>
+          <button class="btn btn--black btn--full" type="submit">Upload Identity Document</button>
+          <div class="form__result form__result--error" id="dash-identity-error" role="alert" tabindex="-1" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="band band--paper" id="dash-interview" aria-labelledby="dash-interview-title" hidden>
+    <div class="wrap">
+      <p class="eyebrow">Step 3</p>
+      <h2 class="display display--md" id="dash-interview-title">Recorded interview.</h2>
+      <p class="lede" id="dash-interview-state"></p>
+      <form class="form admin-gap" id="dash-interview-form" novalidate>
+        <p>Record a separate video for each question, upload each one to your Google Drive, set it to "Anyone with the link can view", and paste its link below. These are different from your assessment questions.</p>
+        <div class="tasks" id="dash-interview-questions"></div>
+        <div class="field field--check">
+          <input id="dash-interview-shared" type="checkbox" required>
+          <label for="dash-interview-shared">I have set every link so that Seudocom can view it.</label>
+        </div>
+        <div class="field field--check">
+          <input id="dash-interview-consent" type="checkbox" required>
+          <label for="dash-interview-consent">I consent to Seudocom reviewing my recordings. I understand that this does not guarantee employment. See our <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</label>
+        </div>
+        <button class="btn btn--black btn--full" type="submit">Submit Interview</button>
+        <div class="form__result form__result--error" id="dash-interview-error" role="alert" tabindex="-1" hidden></div>
+      </form>
     </div>
   </section>
   <section class="band band--black" id="dash-affidavit" aria-labelledby="dash-affidavit-title" hidden>
     <div class="wrap">
-      <p class="eyebrow eyebrow--lime">Before your interview</p>
+      <p class="eyebrow eyebrow--lime">Step 4</p>
       <h2 class="display display--md" id="dash-affidavit-title">Notarized affidavit.</h2>
       <p class="lede" id="dash-affidavit-state"></p>
       <div id="dash-affidavit-steps">

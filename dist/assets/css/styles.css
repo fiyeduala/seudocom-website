@@ -401,6 +401,7 @@ input:focus, select:focus, textarea:focus { background-color: #FBFFE0; }
 .admin-table th, .admin-table td { padding: 10px 12px; text-align: left; border-bottom: 2px solid var(--black); overflow-wrap: anywhere; }
 .admin-table th { background: var(--black); color: var(--white); }
 .admin-table tr:last-child td { border-bottom: 0; }
+.admin-table th, .admin-table td:not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)) { white-space: nowrap; overflow-wrap: normal; }
 .admin-facts { display: grid; grid-template-columns: minmax(110px, 180px) minmax(0, 1fr); gap: 6px 16px; margin-top: 20px; }
 .admin-facts dt { font-weight: 700; }
 .admin-facts dd { overflow-wrap: anywhere; }
@@ -412,3 +413,8 @@ input:focus, select:focus, textarea:focus { background-color: #FBFFE0; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .prose-list { display: grid; gap: 8px; max-width: 42em; padding-left: 1.25em; list-style: square; }
 .band--black .form { color: var(--black); }
+
+.dash-steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; }
+.dash-steps li { padding: 6px 12px; border: 2px solid var(--black); background: var(--white); font-weight: 600; }
+.dash-steps .is-done { background: var(--black); color: var(--white); }
+.dash-steps .is-current { background: var(--lime); font-weight: 800; }

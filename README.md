@@ -77,4 +77,6 @@ Review the wording of the consent line and success messages (in `forms.js`) when
 - The first visit to `admin.html` creates `seudocom-data/setup-key.txt`. Enter that key to create the admin account. The key file is then deleted.
 - Hosting needs PHP 8 with pdo_sqlite and a working `mail()`. Override settings with `seudocom-config.php` beside `seudocom-data` (a PHP file returning an array, for example `mail_from` or `site_url`).
 - The affidavit PDF is generated from `scripts/affidavit-template.html` with `npm run affidavit`. Run `npm run build` afterwards. Signed copies are stored in `seudocom-data/affidavits`.
+- Applicants move through assessment, certificate, identity check and recorded interview, then affidavit. An admin approves or declines each stage, individually or in bulk. Statuses and their messages are in `src/api/lib.php`; interview questions are in `careers-data.js`.
+- Identity documents go to `seudocom-data/identity` and are deleted when the admin makes a decision. The VAPID key for push notifications is created once in `seudocom-data/vapid-private.pem`. Back it up, because replacing it disconnects every subscribed device. Push requires HTTPS and PHP curl.
 - Access codes are stored only as keyed hashes, so a lost code can only be replaced from the admin console. Confirm the person's identity first.

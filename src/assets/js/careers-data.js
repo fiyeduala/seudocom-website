@@ -4,6 +4,7 @@
  * ADD A POSITION: copy an entry in "jobs" and give it a unique lowercase "id".
  * REMOVE A POSITION: delete its entry. With no entries, the page shows an empty-state message.
  * ASSESSMENT: each position has its own "assignments" and "questions". Each item gets its own Google Drive link field.
+ * INTERVIEW: "interviewQuestions" is the separate recorded interview, opened only after the identity check.
  */
 window.SEUDOCOM_CAREERS = {
   jobs: [
@@ -40,6 +41,13 @@ window.SEUDOCOM_CAREERS = {
         'A client asks something you don\'t know the answer to. What do you do?',
         'Tell us about a time you turned an unhappy customer around. What did you do, and what happened?',
         'You have several open requests and a new urgent one arrives. How do you decide what to do first and keep everyone informed?'
+      ],
+      interviewQuestions: [
+        'Please state your full name and the position you applied for, then tell us what you learned from your customer support training or certificate.',
+        'A client insists you promised something that your records do not show. Role-play how you would respond.',
+        'A client shares a password with you in a support chat. What do you do, and why?',
+        'Our clients may be in other time zones. Describe your remote work setup and how you would stay reliable on a full-time schedule.',
+        'What does excellent customer support mean to you? Give one example from your own experience.'
       ]
     },
     {
@@ -75,17 +83,24 @@ window.SEUDOCOM_CAREERS = {
         'One of your team members is consistently underperforming. How do you handle it?',
         'Which support measures do you rely on most, and how have you used them to improve a team\'s results?',
         'Tell us about a difficult decision you made as a manager. What did you decide, and what did you learn?'
+      ],
+      interviewQuestions: [
+        'Please state your full name and the position you applied for, then tell us what you learned from your customer support training or certificate.',
+        'Two team members give a client conflicting answers and the client complains to you. Walk us through how you resolve it.',
+        'How would you keep a remote support team across different time zones motivated and accountable?',
+        'A team member shares client information in the wrong place. What do you do in the first hour, and what do you change afterward?',
+        'What would you want your team to achieve in your first six months, and how would you show that progress?'
       ]
     }
   ],
 
   // The steps shown under "The application process". Reword, add or remove freely.
   process: [
-    { title: 'Apply', text: 'Submit your application and resume. You then receive a unique access code. Keep it safe: you need it to view your status.' },
-    { title: 'Complete the assessment', text: 'Carry out the assignments, activities and tests for your position.' },
-    { title: 'Record your answers', text: 'Record yourself answering each question, upload each recording to Google Drive and paste each link into the assessment form.' },
-    { title: 'Seudocom reviews', text: 'Seudocom reviews your application and assessment. Check your status on your dashboard using your access code. Seudocom may also email updates.' },
-    { title: 'Notarized affidavit', text: 'Download the Seudocom affidavit, have it notarized, then upload the signed copy to your dashboard before your interview.' },
-    { title: 'Interview and decision', text: 'Attend your interview. Seudocom then makes its recruitment decision.' }
+    { title: 'Apply', text: 'Submit your application and resume. You then receive a unique access code. Keep it safe: you need it to view your status. Turn on notifications on your dashboard so you hear about your progress.' },
+    { title: 'Assessment', text: 'Complete the assignments and record your answers, then submit your Google Drive links. Seudocom reviews your work and approves or declines it.' },
+    { title: 'Certificate', text: 'If approved, upload a customer support or customer relations certificate from any recognized provider. If you do not have one, your dashboard lists options.' },
+    { title: 'Identity check and recorded interview', text: 'If approved, confirm your identity on your dashboard. Once it is confirmed, record your answers to the interview questions and submit your Google Drive links.' },
+    { title: 'Notarized affidavit', text: 'If your interview is approved, download the Seudocom affidavit, have it notarized by any licensed notary, and upload the signed copy to your dashboard.' },
+    { title: 'Decision', text: 'Seudocom makes its recruitment decision. Your dashboard shows each decision. If you are hired, you are also told by email.' }
   ]
 };

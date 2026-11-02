@@ -2,7 +2,7 @@
 // A value left as null shows a visible "to be provided" placeholder on the site.
 export default {
   // The live domain, with no trailing slash. Used for canonical links, Open Graph and the sitemap.
-  siteUrl: 'https://pseudocom.org',
+  siteUrl: 'https://seudocom.org',
 
   contact: {
     email: 'contact@seudocom.org',

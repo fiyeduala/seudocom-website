@@ -10,13 +10,14 @@
   <meta property="og:site_name" content="Seudocom">
   <meta property="og:title" content="Notarization Partners | Seudocom">
   <meta property="og:description" content="Notarization partners for Seudocom applicants.">
-  <meta property="og:url" content="https://pseudocom.org/notaries">
-  <meta property="og:image" content="https://pseudocom.org/assets/img/og-seudocom.jpg">
+  <meta property="og:url" content="https://seudocom.org/notaries">
+  <meta property="og:image" content="https://seudocom.org/assets/img/og-seudocom.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#111111">
   <link rel="icon" href="assets/favicon/favicon.ico" sizes="48x48">
   <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap">
@@ -62,7 +63,7 @@
 <section class="band">
   <div class="wrap">
     <p class="process__note">You do not have to use a listed partner. Any fee is set by the notary and paid directly to them. Never send notary fees to Seudocom or to anyone claiming to collect them for Seudocom.</p>
-    <div class="tasks admin-gap" id="partner-list" aria-live="polite"></div>
+    <div class="tasks admin-gap" id="partner-list" data-kind="notary" data-fallback="You can use any licensed notary public." aria-live="polite"></div>
     <div class="btn-row assessment-links">
       <a class="btn btn--black" href="assets/docs/seudocom-affidavit-of-confirmation.pdf" download>Download Affidavit</a>
       <a class="btn btn--white" href="dashboard.html">Applicant Dashboard</a>

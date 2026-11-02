@@ -44,3 +44,4 @@ ErrorDocument 404 /404.html
 
 AddType image/webp .webp
 AddType image/svg+xml .svg
+AddType application/manifest+json .webmanifest

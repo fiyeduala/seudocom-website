@@ -41,9 +41,9 @@ Written so that each item can be answered directly. Nothing below was assumed on
 
 ## Recruitment items to confirm
 
-- Domain spelling: the site is set to pseudocom.org, while the email is contact@seudocom.org.
 - Legal review of the affidavit wording, including the Nigeria-specific statements and the blanket criminal record statement.
-- Notarization partners, added from the admin console.
+- Notarization partners and certificate providers, added from the admin console. Each needs its cost and its relationship to Seudocom and its recruiters.
+- Client approval of the certificate requirement, the identity check and the drafted interview questions in `careers-data.js`.
 - Approval of the drafted job duties, assignments and interview questions.
 - Legal advice on requiring nationality on the application.
 - A privacy notice covering applicant data, video recordings and Google Drive sharing.

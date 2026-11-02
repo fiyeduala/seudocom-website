@@ -5,6 +5,8 @@
   var API = 'api/admin.php?action=';
   var jobs = (window.SEUDOCOM_CAREERS || {}).jobs || [];
   var statuses = {};
+  var nextStatus = {};
+  var selected = {};
   var partnerId = 0;
   var $ = function (id) { return document.getElementById(id); };
 
@@ -57,9 +59,23 @@
     return get('list', filters()).then(function (d) {
       var rows = $('admin-rows');
       rows.textContent = '';
+      var visible = {};
       d.applicants.forEach(function (a) {
         var tr = el('tr');
-        [a.name, a.email, title(a.position), statuses[a.status] || a.status, day(a.createdAt), a.assessmentAt ? 'Submitted' : 'None', a.affidavitAt ? 'Uploaded' : 'None'].forEach(function (t) { tr.appendChild(el('td', '', t)); });
+        visible[a.id] = true;
+        var pick = el('td');
+        var box = el('input');
+        box.type = 'checkbox';
+        box.className = 'bulk-pick';
+        box.checked = !!selected[a.id];
+        box.setAttribute('aria-label', 'Select ' + a.name);
+        box.addEventListener('change', function () {
+          if (box.checked) selected[a.id] = true; else delete selected[a.id];
+          paintBulk();
+        });
+        pick.appendChild(box);
+        tr.appendChild(pick);
+        [a.name, a.email, title(a.position), statuses[a.status] || a.status, day(a.createdAt), a.assessmentAt ? 'Submitted' : 'None', a.certificateAt ? 'Uploaded' : 'None', a.interviewAt ? 'Submitted' : 'None', a.affidavitAt ? 'Uploaded' : 'None'].forEach(function (t) { tr.appendChild(el('td', '', t)); });
         var td = el('td');
         var open = el('button', 'btn btn--white btn--sm', 'Open');
         open.type = 'button';
@@ -69,11 +85,27 @@
         tr.appendChild(td);
         rows.appendChild(tr);
       });
+      Object.keys(selected).forEach(function (id) { if (!visible[id]) delete selected[id]; });
+      paintBulk();
       $('admin-count').textContent = d.applicants.length + (d.applicants.length === 1 ? ' applicant' : ' applicants');
       return get('list', { status: filters().status, position: filters().position });
     }).then(function (d) {
       $('broadcast-count').textContent = 'Current recipients: ' + d.applicants.length + '.';
     }).catch(failure);
+  }
+
+  function paintBulk() {
+    var count = Object.keys(selected).length;
+    $('bulk-count').textContent = count + (count === 1 ? ' applicant selected.' : ' applicants selected.');
+    $('bulk-approve').disabled = !count;
+    $('bulk-decline').disabled = !count;
+  }
+
+  function decide(decision, ids, note) {
+    return post('bulk', { decision: decision, ids: ids, note: note }).then(function (d) {
+      var where = d.delivery === 'log' ? 'written to the local test log' : 'accepted by the mail server';
+      return (decision === 'approve' ? 'Approved: ' : 'Declined: ') + d.moved + '. Skipped because not awaiting this decision: ' + d.skipped + '. Notifications accepted by push services: ' + d.pushed + '.' + (d.emailed ? ' Hired emails ' + where + ': ' + d.emailed + '.' : '') + (d.emailFailed ? ' Hired emails that failed: ' + d.emailFailed + '.' : '');
+    });
   }
 
   function fact(list, label, value) {
@@ -82,12 +114,36 @@
   }
 
   function itemLabel(job, key) {
-    var m = key.match(/^(assignment|question)(\d+)$/);
+    var m = key.match(/^(assignment|question|interview)(\d+)$/);
     if (!m || !job) return key;
     var i = Number(m[2]) - 1;
+    if (m[1] === 'interview') return 'Interview question ' + m[2] + ': ' + ((job.interviewQuestions || [])[i] || '');
     if (m[1] === 'question') return 'Question ' + m[2] + ': ' + (job.questions[i] || '');
     var a = (job.assignments || [])[i];
     return a ? a.type + ' ' + m[2] + ': ' + a.title : key;
+  }
+
+  function linkList(job, links) {
+    var ul = el('ul', 'admin-links');
+    Object.keys(links).forEach(function (key) {
+      var li = el('li');
+      li.appendChild(el('p', '', itemLabel(job, key)));
+      var link = el('a', '', links[key]);
+      link.href = links[key];
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      li.appendChild(link);
+      ul.appendChild(li);
+    });
+    return ul;
+  }
+
+  function downloadLink(text, action, id) {
+    var link = el('a', 'btn btn--white btn--sm', text);
+    link.id = 'download-' + action;
+    link.href = API + action + '&id=' + id;
+    link.setAttribute('download', '');
+    return link;
   }
 
   function detail(id) {
@@ -115,6 +171,22 @@
       resume.setAttribute('download', '');
       box.appendChild(resume);
 
+      box.appendChild(el('h3', 'form__heading', 'Certificate'));
+      if (a.certificate_at) {
+        box.appendChild(el('p', '', 'Uploaded ' + day(a.certificate_at) + '. Issued by: ' + (a.certificate_issuer || 'Not stated')));
+        box.appendChild(downloadLink('Download Certificate', 'certificate', a.id));
+      } else {
+        box.appendChild(el('p', '', 'Not uploaded.'));
+      }
+
+      box.appendChild(el('h3', 'form__heading', 'Identity check'));
+      box.appendChild(el('p', '', a.identity_verified_at ? 'Confirmed ' + day(a.identity_verified_at) + '. The document has been deleted.' : a.hasIdentityFile ? 'Document uploaded ' + day(a.identity_at) + '. It is deleted automatically when you approve or decline.' : 'No document on file.'));
+      if (a.hasIdentityFile) box.appendChild(downloadLink('Download Identity Document', 'identity', a.id));
+
+      box.appendChild(el('h3', 'form__heading', 'Recorded interview'));
+      if (a.interview_answers) box.appendChild(linkList(jobOf(a.position), a.interview_answers));
+      else box.appendChild(el('p', '', 'Not submitted.'));
+
       box.appendChild(el('h3', 'form__heading', 'Notarized affidavit'));
       if (a.affidavit_at) {
         box.appendChild(el('p', '', 'Uploaded ' + day(a.affidavit_at)));
@@ -129,24 +201,46 @@
 
       box.appendChild(el('h3', 'form__heading', 'Assessment'));
       if (a.assessment) {
-        var job = jobOf(a.position);
-        var ul = el('ul', 'admin-links');
-        Object.keys(a.assessment).forEach(function (key) {
-          var li = el('li');
-          li.appendChild(el('p', '', itemLabel(job, key)));
-          var link = el('a', '', a.assessment[key]);
-          link.href = a.assessment[key];
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
-          li.appendChild(link);
-          ul.appendChild(li);
-        });
-        box.appendChild(ul);
+        box.appendChild(linkList(jobOf(a.position), a.assessment));
       } else {
         box.appendChild(el('p', '', 'Not submitted.'));
       }
 
-      box.appendChild(el('h3', 'form__heading', 'Change status'));
+      box.appendChild(el('h3', 'form__heading', 'Decision'));
+      var decisionNote = el('textarea');
+      decisionNote.id = 'd-decision-note';
+      decisionNote.rows = 2;
+      var decisionLabel = el('label', '', 'Reason or message shown on the dashboard (optional)');
+      decisionLabel.setAttribute('for', 'd-decision-note');
+      var decisionField = el('div', 'field');
+      decisionField.appendChild(decisionLabel);
+      decisionField.appendChild(decisionNote);
+      box.appendChild(decisionField);
+      var decisions = el('div', 'btn-row');
+      var after = function () { return refresh().then(function () { return detail(a.id); }); };
+      if (nextStatus[a.status]) {
+        var approve = el('button', 'btn btn--black btn--sm', 'Approve: ' + statuses[nextStatus[a.status]]);
+        approve.type = 'button';
+        approve.id = 'd-approve';
+        approve.addEventListener('click', function () {
+          if (nextStatus[a.status] === 'successful' && !confirm('Mark ' + a.full_name + ' as hired and send the hired email?')) return;
+          decide('approve', [a.id], decisionNote.value).then(after).catch(failure);
+        });
+        decisions.appendChild(approve);
+      }
+      if (a.status !== 'successful' && a.status !== 'unsuccessful') {
+        var decline = el('button', 'btn btn--white btn--sm', 'Decline');
+        decline.type = 'button';
+        decline.id = 'd-decline';
+        decline.addEventListener('click', function () {
+          if (!confirm('Decline ' + a.full_name + '? They will see this on their dashboard.')) return;
+          decide('decline', [a.id], decisionNote.value).then(after).catch(failure);
+        });
+        decisions.appendChild(decline);
+      }
+      box.appendChild(decisions);
+
+      box.appendChild(el('h3', 'form__heading', 'Change status manually'));
       var form = el('form', 'form');
       var sf = el('div', 'field');
       var sl = el('label', '', 'Status');
@@ -169,6 +263,7 @@
       form.appendChild(nf);
       var save = el('button', 'btn btn--black', 'Save Status');
       save.type = 'submit';
+      form.appendChild(el('p', 'admin-small', a.pushDevices ? 'Push notifications are on for ' + a.pushDevices + (a.pushDevices === 1 ? ' device.' : ' devices.') : 'This applicant has not turned on push notifications.'));
       form.appendChild(save);
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -210,7 +305,7 @@
 
   function resetPartnerForm() {
     partnerId = 0;
-    ['p-name', 'p-url', 'p-location', 'p-details'].forEach(function (id) { $(id).value = ''; });
+    ['p-name', 'p-url', 'p-location', 'p-details', 'p-cost', 'p-disclosure', 'p-country'].forEach(function (id) { $(id).value = ''; });
     $('partner-form-title').textContent = 'Add a partner';
     $('partner-cancel').hidden = true;
   }
@@ -223,7 +318,8 @@
       d.partners.forEach(function (p) {
         var box = el('article', 'task');
         box.appendChild(el('h4', 'form__subject', p.name));
-        box.appendChild(el('p', 'admin-pre', [p.url, p.location, p.details].filter(Boolean).join('\n')));
+        box.appendChild(el('p', 'admin-small', p.kind === 'certificate' ? 'Certificate provider' : 'Notary'));
+        box.appendChild(el('p', 'admin-pre', [p.url, p.location, p.country && 'Shown to applicants from: ' + p.country, p.details, p.cost && 'Cost: ' + p.cost, p.disclosure && 'Relationship: ' + p.disclosure].filter(Boolean).join('\n')));
         var actions = el('div', 'btn-row');
         var edit = el('button', 'btn btn--white btn--sm', 'Edit');
         edit.type = 'button';
@@ -234,6 +330,10 @@
           $('p-url').value = p.url;
           $('p-location').value = p.location || '';
           $('p-details').value = p.details || '';
+          $('p-kind').value = p.kind || 'notary';
+          $('p-cost').value = p.cost || '';
+          $('p-disclosure').value = p.disclosure || '';
+          $('p-country').value = p.country || '';
           $('partner-form-title').textContent = 'Edit ' + p.name;
           $('partner-cancel').hidden = false;
           $('p-name').focus();
@@ -256,6 +356,7 @@
   function boot() {
     return get('session').then(function (s) {
       statuses = s.statuses;
+      nextStatus = s.next || {};
       $('setup-form').hidden = !s.setupRequired;
       $('login-form').hidden = s.setupRequired || s.authenticated;
       $('console').hidden = !s.authenticated;
@@ -296,7 +397,35 @@
   $('partner-form').addEventListener('submit', function (e) {
     e.preventDefault();
     showError('');
-    post('partner-save', { id: partnerId, name: $('p-name').value, url: $('p-url').value, location: $('p-location').value, details: $('p-details').value }).then(function () { resetPartnerForm(); return loadPartners(); }).catch(failure);
+    post('partner-save', { id: partnerId, name: $('p-name').value, url: $('p-url').value, location: $('p-location').value, details: $('p-details').value, kind: $('p-kind').value, cost: $('p-cost').value, disclosure: $('p-disclosure').value, country: $('p-country').value }).then(function () { resetPartnerForm(); return loadPartners(); }).catch(failure);
+  });
+
+  $('bulk-all').addEventListener('change', function () {
+    var on = $('bulk-all').checked;
+    Array.prototype.forEach.call(document.querySelectorAll('.bulk-pick'), function (box) {
+      if (box.checked !== on) { box.checked = on; box.dispatchEvent(new Event('change')); }
+    });
+  });
+
+  ['approve', 'decline'].forEach(function (decision) {
+    $('bulk-' + decision).addEventListener('click', function () {
+      var ids = Object.keys(selected).map(Number);
+      var out = $('bulk-result');
+      var warning = decision === 'approve'
+        ? 'Approve ' + ids.length + ' selected applicants and move each to their next stage? Anyone at the affidavit review will be marked as hired and emailed.'
+        : 'Decline ' + ids.length + ' selected applicants? They will see this on their dashboards.';
+      if (!confirm(warning)) return;
+      out.hidden = true;
+      decide(decision, ids, $('bulk-note').value).then(function (text) {
+        selected = {};
+        $('bulk-all').checked = false;
+        $('bulk-note').value = '';
+        out.textContent = text;
+        out.hidden = false;
+        out.focus();
+        return refresh();
+      }).catch(failure);
+    });
   });
 
   $('broadcast-form').addEventListener('submit', function (e) {

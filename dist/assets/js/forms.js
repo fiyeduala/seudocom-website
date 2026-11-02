@@ -14,7 +14,7 @@
     },
     assessment: {
       preview: '<strong>Your links look complete, but nothing has been submitted.</strong> Assessments are not open yet: this form is a preview and is not connected to Seudocom.',
-      success: '<strong>Thank you. Your assessment has been submitted.</strong> Follow its progress on your <a href="dashboard.html">applicant dashboard</a>. A notarized affidavit is required before any interview. Completing the assessment does not guarantee an interview or employment.',
+      success: '<strong>Thank you. Your assessment has been submitted.</strong> Turn on notifications on your <a href="dashboard.html">applicant dashboard</a> so you hear when it has been reviewed. Completing the assessment does not guarantee an interview or employment.',
       failure: '<strong>Your assessment could not be submitted.</strong> Nothing has been received. Please try again later.'
     },
     contact: {
@@ -87,7 +87,7 @@
     var wrap = document.createElement('div');
     wrap.className = 'code-actions';
     var intro = document.createElement('p');
-    intro.innerHTML = '<strong>This is your access code. Write it down now and keep it safe.</strong> You need it to view your status on the applicant dashboard, and it will not be shown again or sent by email.';
+    intro.innerHTML = '<strong>This is your access code. Write it down now and keep it safe.</strong> You need it to view your status on the applicant dashboard, and it will not be shown again or sent by email. Open your dashboard and turn on notifications: that is how Seudocom tells you about your progress.';
     var box = document.createElement('p');
     box.className = 'code-box';
     box.id = 'access-code';

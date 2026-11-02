@@ -37,9 +37,18 @@
         <div class="field"><label for="f-position">Position</label><select id="f-position"></select></div>
       </div>
       <p class="admin-gap" id="admin-count" role="status"></p>
+      <div class="task admin-gap" id="bulk-box">
+        <p><strong id="bulk-count"></strong> Approve moves each person to their next stage. People who are not waiting for that decision are skipped.</p>
+        <div class="field"><label for="bulk-note">Reason or message shown on their dashboards (optional)</label><textarea id="bulk-note" rows="2" maxlength="5000"></textarea></div>
+        <div class="btn-row">
+          <button class="btn btn--black btn--sm" type="button" id="bulk-approve" disabled>Approve Selected</button>
+          <button class="btn btn--white btn--sm" type="button" id="bulk-decline" disabled>Decline Selected</button>
+        </div>
+        <div class="form__result form__result--preview" id="bulk-result" role="status" tabindex="-1" hidden></div>
+      </div>
       <div class="admin-table-wrap">
         <table class="admin-table">
-          <thead><tr><th>Name</th><th>Email</th><th>Position</th><th>Status</th><th>Applied</th><th>Assessment</th><th>Affidavit</th><th><span class="visually-hidden">Open</span></th></tr></thead>
+          <thead><tr><th><input type="checkbox" id="bulk-all" aria-label="Select all shown"></th><th>Name</th><th>Email</th><th>Position</th><th>Status</th><th>Applied</th><th>Assessment</th><th>Certificate</th><th>Interview</th><th>Affidavit</th><th><span class="visually-hidden">Open</span></th></tr></thead>
           <tbody id="admin-rows"></tbody>
         </table>
       </div>
@@ -47,15 +56,19 @@
       <section class="task admin-gap" id="admin-detail" tabindex="-1" hidden></section>
 
       <section class="admin-gap" aria-labelledby="partners-title">
-        <h2 class="display display--md" id="partners-title">Notarization partners.</h2>
-        <p>These appear on the public <a href="notaries.html" target="_blank" rel="noopener">partners page</a>.</p>
+        <h2 class="display display--md" id="partners-title">Partners.</h2>
+        <p>These appear on the public <a href="notaries.html" target="_blank" rel="noopener">notaries</a> and <a href="certificates.html" target="_blank" rel="noopener">certificate options</a> pages. Applicants are told they can use any other provider.</p>
         <div class="tasks admin-gap" id="partner-rows"></div>
         <form class="form admin-gap" id="partner-form" novalidate>
           <h3 class="form__subject" id="partner-form-title">Add a partner</h3>
+          <div class="field"><label for="p-kind">Type</label><select id="p-kind"><option value="notary">Notary</option><option value="certificate">Certificate provider</option></select></div>
           <div class="field"><label for="p-name">Name</label><input id="p-name" type="text" maxlength="200" required></div>
           <div class="field"><label for="p-url">Website link, starting with https://</label><input id="p-url" type="url" maxlength="500" required></div>
           <div class="field"><label for="p-location">Location (optional)</label><input id="p-location" type="text" maxlength="200"></div>
+          <div class="field"><label for="p-country">Show on dashboards for applicants from this country (leave blank for everyone)</label><input id="p-country" type="text" maxlength="100"></div>
           <div class="field"><label for="p-details">Details (optional)</label><textarea id="p-details" rows="3" maxlength="2000"></textarea></div>
+          <div class="field"><label for="p-cost">Cost to applicants, or "Free"</label><input id="p-cost" type="text" maxlength="200" required></div>
+          <div class="field"><label for="p-disclosure">Relationship to Seudocom and its recruiters, or "None". Applicants see this.</label><textarea id="p-disclosure" rows="2" maxlength="500" required></textarea></div>
           <div class="btn-row">
             <button class="btn btn--black" type="submit">Save Partner</button>
             <button class="btn btn--white" type="button" id="partner-cancel" hidden>Cancel Edit</button>
